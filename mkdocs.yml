@@ -1,0 +1,105 @@
+site_name: 0x3xp10i73r
+site_description: Web, API, Android and network security notes, writeups and tooling.
+site_url: https://YOUR-USERNAME.github.io/knowledge-base/
+
+theme:
+  name: material
+  custom_dir: overrides
+  palette:
+    - scheme: slate
+      primary: deep purple
+      accent: pink
+  font:
+    text: IBM Plex Mono
+    code: JetBrains Mono
+  logo: assets/logo.png
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mermaid.min.js
+  - javascripts/giscus.js
+  - javascripts/cursor-effects.js
+
+plugins:
+  - search
+  - tags
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Web App Security:
+      - Overview: web/index.md
+      - Example SQLi Writeup: web/example-sqli-writeup.md
+  - API Security:
+      - Overview: api/index.md
+  - Android / Mobile:
+      - Overview: android/index.md
+      - OWASP Mobile Top 10: android/OWASP-TOP-10.md
+      - Key Concepts: android/key-concepts.md
+      - APK Structure: android/apk-structure.md
+      - Android Terminologies: android/terminologies.md
+      - Android Manifest: android/manifest.md
+      - Setup and Installation: android/setup.md
+      - Network Interception: android/network-interception.md
+      - Frida Scripting: android/frida.md
+      - Tools Reference: android/tools-reference.md
+      - Static Analysis:
+        - Overview: android/static-analysis/index.md
+        - 1. Reading Hardcoded Strings: android/static-analysis/hardcoded-secrets.md
+        - 2. Bad Cryptography Implementation: android/static-analysis/cryptography.md
+        - 3. Reversing Hybrid and Native Apps: android/static-analysis/hybrid-native.md
+        - 4. Obfuscation and Integrity Checks: android/static-analysis/obfuscation.md
+      - Dynamic Analysis:
+        - Overview: android/dynamic-analysis/index.md
+        - 1. Filesystem and Local Storage: android/dynamic-analysis/storage.md
+        - 2. Logging, Screenshots, and Device Checks: android/dynamic-analysis/logging-root.md
+        - 3. WebView Review: android/dynamic-analysis/webview.md
+        - 4. IPC, Intents, and Deep Links: android/dynamic-analysis/ipc-and-intents.md
+      - Penetration Testing Checklist:
+        - Overview: android/pentesting-checklist/index.md
+        - Authentication and Authorization: android/pentesting-checklist/authentication.md
+        - Data Protection: android/pentesting-checklist/data-protection.md
+        - Network and Code: android/pentesting-checklist/network-code.md
+      - Reporting Template: android/reporting.md
+      - References: android/references.md
+  - Network Security:
+      - Overview: network/index.md
+  - Bug Bounty Writeups:
+      - Overview: bug-bounty/index.md
+  - Tools & Cheatsheets:
+      - Overview: tools/index.md
+
+extra:
+  generator: false

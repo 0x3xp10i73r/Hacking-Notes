@@ -1,0 +1,52 @@
+{% if page.meta and page.meta.comments %}
+<h2 id="__comments">Comments</h2>
+
+<!--
+  TODO: replace the data-* attributes below with the values giscus.app
+  generates for YOUR repo once GitHub Discussions is enabled:
+  https://giscus.app
+
+  1. Enable Discussions on your GitHub repo (Settings -> General -> Features)
+  2. Go to https://giscus.app, enter your repo, pick a discussion category
+     (e.g. "Comments"), and copy the generated data-repo-id / data-category-id
+  3. Paste those two values in below
+-->
+<script src="https://giscus.app/client.js"
+        data-repo="YOUR-USERNAME/knowledge-base"
+        data-repo-id="REPLACE_ME"
+        data-category="Comments"
+        data-category-id="REPLACE_ME"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<script>
+  var giscus = document.querySelector("script[src*=giscus]")
+
+  // Keep giscus theme in sync with the site's light/dark toggle
+  var palette = __md_get("__palette")
+  if (palette && typeof palette.color === "object") {
+    var theme = palette.color.scheme === "slate" ? "dark" : "light"
+    giscus.setAttribute("data-theme", theme)
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.body.addEventListener("md-color-scheme", function () {
+      var iframe = document.querySelector("iframe.giscus-frame")
+      if (!iframe) return
+      var scheme = document.body.getAttribute("data-md-color-scheme")
+      var theme = scheme === "slate" ? "dark" : "light"
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme } } }, "https://giscus.app"
+      )
+    })
+  })
+</script>
+{% endif %}
