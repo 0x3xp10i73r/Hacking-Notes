@@ -6,7 +6,7 @@
 
 <div class="terminal-kicker">[ SESSION ACTIVE ] / OPERATOR PROFILE</div>
 
-<h1>Cyber Security Analyst</h1>
+<h1>Security Researcher</h1>
 
 Security researcher focused on web application, API, Android, and network penetration testing. I build practical tooling, document exploitability clearly, and turn technical findings into useful remediation guidance.
 

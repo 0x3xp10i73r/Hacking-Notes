@@ -5,13 +5,18 @@ site_url: https://YOUR-USERNAME.github.io/knowledge-base/
 theme:
   name: material
   custom_dir: overrides
+  # extra.css overrides the actual rendered colors via CSS variables; these
+  # just keep Material's own palette names consistent with that for anyone
+  # reading this config.
   palette:
     - scheme: slate
-      primary: deep purple
-      accent: pink
-  font:
-    text: IBM Plex Mono
-    code: JetBrains Mono
+      primary: black
+      accent: red
+  # Material's default font loader always requests 10 font files (6 weights
+  # of the text font + 4 of the code font). We only actually use 5 total, so
+  # font loading is disabled here and handled with a trimmed request in
+  # overrides/main.html instead (see the `fonts` block override there).
+  font: false
   logo: assets/logo.png
   features:
     - navigation.sections
@@ -25,10 +30,17 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
-extra_javascript:
-  - javascripts/mermaid.min.js
-  - javascripts/giscus.js
-  - javascripts/cursor-effects.js
+# No extra_javascript needed:
+# - Material's own bundle already lazy-loads Mermaid from a CDN only on
+#   pages that actually have a ```mermaid fence (pymdownx.superfences below
+#   wires that up) — the old docs/javascripts/mermaid.min.js was a 3.5MB
+#   file being sent on every single page regardless of whether it had a
+#   diagram. Safe to delete that file from the repo.
+# - giscus is loaded per-page from overrides/partials/comments.html only
+#   when a page opts in with `comments: true`, so the old
+#   docs/javascripts/giscus.js (an empty placeholder) can be deleted too.
+# - The cursor-glow effect (docs/javascripts/cursor-effects.js) has been
+#   dropped as part of the visual refresh; safe to delete that file too.
 
 plugins:
   - search
