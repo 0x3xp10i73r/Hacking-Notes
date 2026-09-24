@@ -92,14 +92,17 @@ body {
 
 /* Below this width the sidebar is an off-canvas drawer opened by the header
    button, so it must keep its default width/offset math and stay toggleable.
-   The pinned, fixed-width look below is desktop-only. */
+   The pinned, fixed-width look below is desktop-only. The header button
+   stays visible at every width (Material hides it by default at desktop
+   since the sidebar there is normally always pinned open) — here it doubles
+   as a collapse/expand control for the pinned sidebar. */
 @media screen and (min-width: 76.25em) {
+  /* Material hides this button by default at desktop widths (min-width:
+     76.25em in its own stylesheet) since the sidebar is normally always
+     pinned open there. Overriding it back on is what makes it usable as a
+     collapse/expand control below. */
   .md-header__button[for="__drawer"] {
-    display: none;
-  }
-
-  #__drawer:checked~.md-container .md-sidebar--primary {
-    transform: none;
+    display: inline-block;
   }
 
   .md-sidebar--primary {
@@ -117,6 +120,29 @@ body {
     height: 100%;
     max-height: none;
     overflow-y: auto;
+  }
+
+  /* Pinned sidebar is visible by default (checkbox starts unchecked); the
+     header button toggles it closed and reclaims its space for content.
+     .md-content normally fills whatever space is left over next to the
+     sidebar via flex-grow, so simply removing the sidebar makes all of that
+     reclaimed width pile up on the left — the content stretches lopsided
+     instead of staying centered. Fixing that: give content a fixed width
+     (matching what it already was: 96rem grid − 18rem sidebar) and center
+     it with real auto margins instead of letting it grow to fill the row. */
+  #__drawer:checked~.md-container .md-sidebar--primary {
+    display: none;
+  }
+
+  #__drawer:checked~.md-container .md-content {
+    flex-grow: 0;
+    margin: 0 auto;
+    max-width: 78rem;
+    width: 100%;
+  }
+
+  #__drawer:checked~.md-container .md-content>.md-content__inner {
+    margin-left: 0.8rem;
   }
 }
 
