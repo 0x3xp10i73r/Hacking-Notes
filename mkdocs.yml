@@ -28,7 +28,11 @@ theme:
     - content.code.annotate
 
 extra_css:
-  - stylesheets/extra.css
+  # The ?v= query string is a cache-buster: extra.css isn't content-hashed
+  # like Material's own bundled CSS, so without this, browsers (and some
+  # static-file servers) can keep serving a stale cached copy after a
+  # rebuild. Bump this number any time extra.css changes.
+  - stylesheets/extra.css?v=5
 
 # No extra_javascript needed:
 # - Material's own bundle already lazy-loads Mermaid from a CDN only on

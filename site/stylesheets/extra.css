@@ -122,13 +122,6 @@ body {
     overflow-y: auto;
   }
 
-  /* Material reserves `padding-right: calc(100% - 11.5rem)` here, sized for
-     its default 12.1rem sidebar. With our wider sidebar that leaves the nav
-     stuck at 11.5rem wide, so labels wrap and truncate. */
-  .md-sidebar--primary .md-sidebar__inner {
-    padding-right: 0;
-  }
-
   /* Pinned sidebar is visible by default (checkbox starts unchecked); the
      header button toggles it closed and reclaims its space for content.
      .md-content normally fills whatever space is left over next to the
@@ -149,8 +142,7 @@ body {
   }
 
   #__drawer:checked~.md-container .md-content>.md-content__inner {
-    margin-left: 1.2rem;
-    margin-right: 1.2rem;
+    margin-left: 0.8rem;
   }
 }
 
@@ -255,25 +247,6 @@ body {
 .md-nav--primary .md-nav__link:hover {
   background: var(--kb-panel-raised);
   color: var(--kb-text);
-}
-
-/* Nested groups (e.g. Static Analysis) render as a wrapper div that is
-   itself a .md-nav__link, holding a link and a chevron label that are also
-   .md-nav__link. Padding only belongs on the inner two, otherwise it stacks
-   three deep and crushes the text. */
-.md-nav--primary .md-nav__link.md-nav__container {
-  padding: 0;
-}
-
-.md-nav--primary .md-nav__container>.md-nav__link:first-child {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.md-nav--primary .md-nav__container>label.md-nav__link {
-  flex: 0 0 auto;
-  padding-left: 0.4rem;
-  padding-right: 0.5rem;
 }
 
 .md-nav--primary .md-nav__link--active {
@@ -389,13 +362,8 @@ body {
   padding-top: 2rem;
 }
 
-/* Give documentation the full reading width; the page TOC is intentionally
-   hidden. Material's own stylesheet has a more specific
-   `.md-sidebar--secondary:not([hidden])` rule that re-shows it on any page
-   with headings, so matching that specificity is what actually keeps it
-   (and the empty column it reserves) gone. */
-.md-sidebar--secondary,
-.md-sidebar--secondary:not([hidden]) {
+/* Give documentation the full reading width; the page TOC is intentionally hidden. */
+.md-sidebar--secondary {
   display: none;
 }
 
