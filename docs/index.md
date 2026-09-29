@@ -4,7 +4,7 @@
 
 <div class="profile-cover" role="img" aria-label="Abstract circuit board security research header"></div>
 
-<div class="terminal-kicker">[ SESSION ACTIVE ] / OPERATOR PROFILE</div>
+<div class="terminal-kicker">root@0x3xp10i73r:~# ./whoami.sh</div>
 
 <h1>Security Researcher</h1>
 
@@ -12,7 +12,7 @@ Security researcher focused on web application, API, Android, and network penetr
 
 <div class="resume-links" markdown>
 
-[VIEW EXPERIENCE](#experience) · [SECURITY NOTES](android/index.md)
+[./view-experience.sh](#experience) · [./security-notes.sh](android/index.md)
 
 </div>
 
@@ -25,7 +25,7 @@ Security researcher focused on web application, API, Android, and network penetr
 <div class="profile-grid">
 
 <a class="profile-card" href="https://app.hackthebox.com/" rel="noopener" target="_blank">
-<img class="profile-logo-image" src="assets/hack-the-box-seeklogo.png" alt="Hack The Box logo">
+<img class="profile-logo-image" src="assets/hack-the-box-seeklogo.png" alt="Hack The Box logo" width="56" height="56" loading="lazy" decoding="async">
 <span class="profile-card-copy">
 <strong>Hack The Box</strong>
 <small>Labs, challenges, and security practice</small>
@@ -34,7 +34,7 @@ Security researcher focused on web application, API, Android, and network penetr
 </a>
 
 <a class="profile-card" href="https://tryhackme.com/" rel="noopener" target="_blank">
-<img class="profile-logo-image" src="assets/thm.png" alt="TryHackMe logo">
+<img class="profile-logo-image" src="assets/thm.png" alt="TryHackMe logo" width="56" height="56" loading="lazy" decoding="async">
 <span class="profile-card-copy">
 <strong>TryHackMe</strong>
 <small>Guided rooms and hands-on learning</small>
@@ -219,5 +219,3 @@ Problem solving | Initiative | Time management | Communication | Teamwork
 </div>
 
 </div>
-
-

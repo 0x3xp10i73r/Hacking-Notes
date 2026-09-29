@@ -1,29 +1,68 @@
 :root {
-  --md-text-font: "IBM Plex Mono";
+  /* Space Grotesk for prose/headings, JetBrains Mono for code and the terminal chrome.
+     Both are variable fonts loaded in overrides/main.html. */
+  --md-text-font: "Space Grotesk";
   --md-code-font: "JetBrains Mono";
 
-  /* Case-file palette: graphite surfaces, one accent (redaction-ink red). */
-  --kb-ink: #0a0c0b;
-  --kb-panel: #141715;
-  --kb-panel-raised: #1b1f1c;
-  --kb-border: #2b302c;
-  --kb-text: #e4e7e2;
-  --kb-muted: #8d948c;
-  --kb-accent: #d45844;
-  --kb-accent-soft: rgba(212, 88, 68, 0.14);
+  /* Dracula (https://draculatheme.com). Surfaces: page background, the
+     darker "sidebar" shade for panels/code, and a lighter raised shade. */
+  --kb-ink: #282a36;
+  --kb-panel: #21222c;
+  --kb-panel-raised: #343746;
+  --kb-border: #44475a;
+  --kb-text: #f8f8f2;
+  /* Dracula's own comment color (#6272a4) is only ~3:1 on these surfaces,
+     so text uses a brighter shade of the same hue (6:1+). */
+  --kb-muted: #a3abcd;
+
+  --kb-purple: #bd93f9;
+  --kb-pink: #ff79c6;
+  --kb-cyan: #8be9fd;
+  --kb-green: #50fa7b;
+  --kb-orange: #ffb86c;
+  --kb-yellow: #f1fa8c;
+  --kb-red: #ff5555;
+
+  --kb-comment: #7d8bbf;
+
+  /* macOS-style window buttons, drawn as three radial gradients so the
+     terminal title bars need no images. */
+  --kb-window-dots:
+    radial-gradient(circle at 1rem 50%, #ff5555 0.26rem, transparent 0.28rem),
+    radial-gradient(circle at 1.8rem 50%, #ffb86c 0.26rem, transparent 0.28rem),
+    radial-gradient(circle at 2.6rem 50%, #50fa7b 0.26rem, transparent 0.28rem);
+
+  --kb-accent: var(--kb-purple);
+  --kb-accent-soft: rgba(189, 147, 249, 0.16);
 }
 
 [data-md-color-scheme="slate"] {
   --md-default-bg-color: var(--kb-ink);
   --md-default-fg-color: var(--kb-text);
-  --md-default-fg-color--light: #b7bcb5;
+  --md-default-fg-color--light: var(--kb-muted);
   --md-default-fg-color--lightest: var(--kb-border);
   --md-code-bg-color: var(--kb-panel);
   --md-code-fg-color: var(--kb-text);
-  --md-typeset-a-color: var(--kb-accent);
+  --md-typeset-a-color: var(--kb-pink);
+  --md-typeset-mark-color: rgba(241, 250, 140, 0.25);
   --md-primary-fg-color: var(--kb-panel);
   --md-primary-bg-color: var(--kb-text);
   --md-accent-fg-color: var(--kb-accent);
+  --md-accent-fg-color--transparent: var(--kb-accent-soft);
+
+  /* Syntax highlighting: the Dracula editor palette. */
+  --md-code-hl-keyword-color: var(--kb-pink);
+  --md-code-hl-string-color: var(--kb-yellow);
+  --md-code-hl-number-color: var(--kb-purple);
+  --md-code-hl-constant-color: var(--kb-purple);
+  --md-code-hl-function-color: var(--kb-green);
+  --md-code-hl-special-color: var(--kb-cyan);
+  --md-code-hl-operator-color: var(--kb-pink);
+  --md-code-hl-punctuation-color: var(--kb-text);
+  --md-code-hl-name-color: var(--kb-text);
+  --md-code-hl-variable-color: var(--kb-text);
+  --md-code-hl-generic-color: var(--kb-text);
+  --md-code-hl-comment-color: #7d8bbf;
 }
 
 body {
@@ -56,7 +95,7 @@ body {
 .md-header__topic {
   font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
 }
 
 .md-header__button.md-logo img,
@@ -109,7 +148,8 @@ body {
     background: var(--kb-panel);
     border-right: 1px solid var(--kb-border);
     align-self: flex-start;
-    height: calc(100vh - 4rem);
+    /* Sticky under the header (3.45rem tall), filling the rest of the screen. */
+    height: calc(100dvh - 3.45rem);
     max-width: 18rem;
     min-height: 0;
     width: 18rem;
@@ -120,6 +160,11 @@ body {
     height: 100%;
     max-height: none;
     overflow-y: auto;
+  }
+
+  /* Let the sidebar meet the header instead of floating 1.5rem below it. */
+  .md-main__inner {
+    margin-top: 0;
   }
 
   /* Material reserves `padding-right: calc(100% - 11.5rem)` here, sized for
@@ -196,12 +241,13 @@ body {
   color: var(--kb-muted);
   cursor: pointer;
   display: flex;
-  font-size: 0.68rem;
+  font-family: var(--md-code-font-family);
+  font-size: 0.74rem;
   font-weight: 600;
   justify-content: space-between;
-  letter-spacing: 0.03em;
+  letter-spacing: 0;
   padding: 0.48rem 0.65rem;
-  text-transform: uppercase;
+  text-transform: none;
   transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
@@ -213,9 +259,10 @@ body {
 
 .md-nav--primary .md-nav__item--section>.md-nav__link::after {
   color: var(--kb-accent);
-  content: "+";
-  font-size: 1rem;
-  font-weight: 700;
+  content: "[+]";
+  font-family: var(--md-code-font-family);
+  font-size: 0.7rem;
+  font-weight: 500;
   opacity: 0.9;
   transition: transform 180ms ease, color 180ms ease;
 }
@@ -227,8 +274,8 @@ body {
 }
 
 .md-nav--primary .md-nav__item--section>.md-nav__toggle:checked~.md-nav__link::after {
-  content: "−";
-  transform: rotate(180deg);
+  content: "[-]";
+  transform: none;
 }
 
 .md-nav--primary .md-nav__item--section .md-nav__item {
@@ -247,9 +294,10 @@ body {
 .md-nav--primary .md-nav__link {
   border-radius: 5px;
   color: var(--kb-muted);
-  font-size: 0.78rem;
+  font-family: var(--md-code-font-family);
+  font-size: 0.74rem;
   padding: 0.4rem 0.65rem;
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .md-nav--primary .md-nav__link:hover {
@@ -420,25 +468,41 @@ body {
   max-width: 58rem;
 }
 
+/* Heading scale. Material's defaults are light (300) and loose; a sans
+   reads better tighter and heavier on a dark background. */
 .md-typeset h1,
 .md-typeset h2,
-.md-typeset h3 {
-  letter-spacing: 0;
+.md-typeset h3,
+.md-typeset h4 {
+  color: var(--kb-text);
+  text-wrap: balance;
 }
 
 .md-typeset h1 {
-  color: var(--kb-text);
+  font-size: 2.05em;
   font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
 .md-typeset h2 {
   border-bottom: 1px solid var(--kb-border);
-  color: var(--kb-text);
+  font-size: 1.5em;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
   padding-bottom: 0.45rem;
 }
 
 .md-typeset h3 {
-  color: var(--kb-text);
+  font-size: 1.15em;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.md-typeset h4 {
+  font-size: 0.95em;
+  font-weight: 700;
 }
 
 .md-typeset a {
@@ -446,7 +510,7 @@ body {
 }
 
 .md-typeset a:hover {
-  color: var(--kb-accent);
+  color: var(--kb-cyan);
 }
 
 .resume-hero {
@@ -460,7 +524,7 @@ body {
 
 .profile-cover {
   background-image:
-    linear-gradient(90deg, rgba(10, 12, 11, 0.15), rgba(10, 12, 11, 0.55)),
+    linear-gradient(90deg, rgba(40, 42, 54, 0.15), rgba(40, 42, 54, 0.55)),
     url("../assets/luffy.jpg");
   background-position: right center;
   background-size: cover;
@@ -472,7 +536,7 @@ body {
 }
 
 .profile-cover::after {
-  background: linear-gradient(180deg, transparent 70%, rgba(10, 12, 11, 0.7) 100%);
+  background: linear-gradient(180deg, transparent 70%, rgba(40, 42, 54, 0.75) 100%);
   content: "";
   inset: 0;
   position: absolute;
@@ -482,6 +546,9 @@ body {
   border: 0;
   color: var(--kb-text);
   font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
   margin: 0.45rem 0 0.8rem;
   padding: 0;
 }
@@ -491,8 +558,9 @@ body {
 }
 
 .terminal-kicker {
-  color: var(--kb-accent);
-  font-size: 0.76rem;
+  color: var(--kb-green);
+  font-family: var(--md-code-font-family);
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
 }
 
@@ -622,9 +690,10 @@ body {
 }
 
 .metric strong {
-  color: var(--kb-accent);
+  color: var(--kb-cyan);
+  font-family: var(--md-code-font-family);
   font-size: 1.35rem;
-  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
 }
 
 .metric strong+strong {
@@ -765,9 +834,10 @@ body {
 
 .md-typeset table:not([class]) th {
   color: var(--kb-text);
-  font-weight: 700;
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
+  font-weight: 650;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
   padding: 0.65rem 0.95rem;
   border: 1px solid var(--kb-border);
   text-align: left;
@@ -878,4 +948,369 @@ body {
   border: 1px solid var(--md-default-fg-color--lightest);
   border-radius: 8px;
   padding: 1rem 1.2rem;
+}
+
+/* ---------------------------------------------------------------------
+   Typography & finishing layer
+   --------------------------------------------------------------------- */
+
+html {
+  scrollbar-color: var(--kb-border) var(--kb-ink);
+  scrollbar-width: thin;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern", "liga", "calt";
+}
+
+::selection {
+  background: var(--kb-border);
+  color: var(--kb-text);
+}
+
+.md-typeset {
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+.md-typeset>p,
+.md-typeset>ul,
+.md-typeset>ol {
+  text-wrap: pretty;
+}
+
+/* Dracula markdown convention: bold is orange. */
+.md-typeset strong {
+  color: var(--kb-orange);
+  font-weight: 650;
+}
+
+/* Content links: quiet underline that firms up on hover. */
+.md-typeset p a,
+.md-typeset li a,
+.md-typeset td a {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 121, 198, 0.45);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 150ms ease, color 150ms ease;
+}
+
+.md-typeset p a:hover,
+.md-typeset li a:hover,
+.md-typeset td a:hover {
+  text-decoration-color: currentcolor;
+}
+
+/* Everything code-like is JetBrains Mono. Ligatures are off on purpose:
+   in security notes `!=`, `->` and `==` must be read as typed. */
+.md-typeset code,
+.md-typeset pre,
+.md-typeset kbd,
+.md-typeset samp,
+.md-typeset .highlight,
+.md-typeset .highlighttable,
+.md-typeset .md-clipboard,
+.md-typeset .mermaid,
+.md-search-result code {
+  font-family: var(--md-code-font-family);
+  font-variant-ligatures: none;
+  font-feature-settings: "calt" 0, "liga" 0;
+}
+
+.md-typeset pre>code {
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.md-typeset :not(pre)>code {
+  background: var(--kb-panel-raised);
+  border: 1px solid var(--kb-border);
+  border-radius: 4px;
+  color: var(--kb-green);
+  font-size: 0.82em;
+  padding: 0.08em 0.4em;
+}
+
+.md-typeset kbd {
+  background: var(--kb-panel-raised);
+  border: 1px solid var(--kb-border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  box-shadow: none;
+  color: var(--kb-text);
+  font-size: 0.8em;
+}
+
+.md-typeset blockquote {
+  border-left: 3px solid var(--kb-border);
+  color: var(--kb-muted);
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  font-weight: 650;
+}
+
+.md-footer,
+.md-footer-meta {
+  background: var(--kb-ink);
+  border-top: 1px solid var(--kb-border);
+}
+
+/* Respect the OS "reduce motion" setting: drop transitions and animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Terminal layer: everything below turns the site into a shell session.
+   Space Grotesk stays for reading; anything "system-like" is JetBrains Mono.
+   --------------------------------------------------------------------- */
+
+@keyframes kb-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Header: the site name is a shell prompt with a blinking cursor. */
+.md-header__topic {
+  font-family: var(--md-code-font-family);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.md-header__topic:first-child .md-ellipsis::before {
+  color: var(--kb-green);
+  content: "$ ";
+}
+
+.md-header__topic:first-child .md-ellipsis::after {
+  animation: kb-blink 1.1s step-end infinite;
+  color: var(--kb-green);
+  content: "_";
+  margin-left: 0.1em;
+}
+
+/* Page title that replaces the site name on scroll reads like a file. */
+.md-header__topic[data-md-component="header-topic"] .md-ellipsis::before {
+  color: var(--kb-comment);
+  content: "./";
+}
+
+.md-header__topic[data-md-component="header-topic"] .md-ellipsis::after {
+  color: var(--kb-green);
+  content: ".sh";
+}
+
+/* Sidebar as a file tree: directories are cyan ./name/, files are name.sh */
+.md-nav--primary .md-nav__item--section>.md-nav__container>a .md-ellipsis::before {
+  color: var(--kb-comment);
+  content: "./";
+}
+
+.md-nav--primary .md-nav__item--nested>.md-nav__container>a .md-ellipsis::after {
+  color: var(--kb-comment);
+  content: "/";
+}
+
+.md-nav--primary .md-nav__item--nested>.md-nav__container>a {
+  color: var(--kb-cyan);
+  font-weight: 600;
+}
+
+.md-nav--primary .md-nav__item:not(.md-nav__item--nested)>a.md-nav__link .md-ellipsis::after {
+  color: var(--kb-green);
+  content: ".sh";
+  opacity: 0.85;
+}
+
+.md-nav--primary .md-ellipsis {
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+/* Headings read like a shell/markdown session. */
+.md-typeset h1 {
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h1::before {
+  color: var(--kb-green);
+  content: "$ ";
+  font-family: var(--md-code-font-family);
+  font-weight: 500;
+}
+
+.md-typeset h1::after {
+  animation: kb-blink 1.1s step-end infinite;
+  color: var(--kb-green);
+  content: "_";
+  font-family: var(--md-code-font-family);
+  margin-left: 0.08em;
+}
+
+.md-typeset h2::before,
+.md-typeset h3::before {
+  color: var(--kb-comment);
+  font-family: var(--md-code-font-family);
+  font-weight: 400;
+}
+
+.md-typeset h2::before { content: "# "; }
+.md-typeset h3::before { content: "## "; }
+
+/* Card/timeline headings and the hero heading keep their plain text. */
+.resume-hero h1::after,
+.security-card h3::before,
+.education-item h3::before,
+.resume-skills h3::before {
+  content: none;
+}
+
+/* Code blocks are terminal windows: title bar, traffic lights, language. */
+.md-typeset .highlight {
+  background: var(--kb-panel);
+  border: 1px solid var(--kb-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.md-typeset .highlight::before {
+  background: var(--kb-window-dots), var(--kb-panel-raised);
+  border-bottom: 1px solid var(--kb-border);
+  color: var(--kb-muted);
+  content: "code";
+  display: block;
+  font-family: var(--md-code-font-family);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 1rem 0.5rem 3.5rem;
+}
+
+.md-typeset .language-bash::before,
+.md-typeset .language-sh::before,
+.md-typeset .language-shell::before,
+.md-typeset .language-console::before { content: "bash"; }
+.md-typeset .language-javascript::before,
+.md-typeset .language-js::before { content: "javascript"; }
+.md-typeset .language-python::before,
+.md-typeset .language-py::before { content: "python"; }
+.md-typeset .language-java::before { content: "java"; }
+.md-typeset .language-kotlin::before { content: "kotlin"; }
+.md-typeset .language-xml::before { content: "xml"; }
+.md-typeset .language-json::before { content: "json"; }
+.md-typeset .language-yaml::before { content: "yaml"; }
+.md-typeset .language-sql::before { content: "sql"; }
+.md-typeset .language-http::before { content: "http"; }
+.md-typeset .language-text::before,
+.md-typeset .language-txt::before { content: "output"; }
+
+.md-typeset .highlight pre {
+  margin: 0;
+}
+
+.md-typeset .highlight pre>code {
+  border: 0;
+  border-radius: 0;
+}
+
+/* Admonitions read as log tags. */
+.md-typeset .admonition-title,
+.md-typeset summary {
+  font-family: var(--md-code-font-family);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Tables: header row in mono like a command's column output. */
+.md-typeset table:not([class]) th {
+  font-family: var(--md-code-font-family);
+  font-size: 0.66rem;
+}
+
+/* Hero card is a terminal window running ./whoami.sh */
+.resume-hero {
+  overflow: hidden;
+}
+
+.resume-hero::before {
+  background: var(--kb-window-dots), var(--kb-panel-raised);
+  border-bottom: 1px solid var(--kb-border);
+  color: var(--kb-muted);
+  content: "bash \2014  0x3xp10i73r@kb: ~";
+  display: block;
+  font-family: var(--md-code-font-family);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  margin: -1.5rem -1.75rem 1.25rem;
+  padding: 0.55rem 1rem 0.55rem 3.5rem;
+}
+
+@media screen and (max-width: 700px) {
+  .resume-hero::before {
+    margin: -1.25rem -1.25rem 1rem;
+  }
+}
+
+.resume-links a {
+  font-family: var(--md-code-font-family);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration-color: var(--kb-green);
+}
+
+.md-footer-meta .md-copyright {
+  font-family: var(--md-code-font-family);
+  font-size: 0.66rem;
+}
+
+.md-footer-meta .md-copyright::before {
+  color: var(--kb-green);
+  content: "$ ";
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-header__topic:first-child .md-ellipsis::after,
+  .md-typeset h1::after {
+    animation: none;
+  }
+}
+
+/* Material's markup leaves whitespace around the title text inside
+   .md-ellipsis, which shows up as a gap before/after generated content.
+   Pull the pseudo-elements back by one mono character to close it. */
+.md-nav--primary .md-nav__item--section>.md-nav__container>a .md-ellipsis::before {
+  margin-right: -1ch;
+}
+
+.md-nav--primary .md-nav__item--nested>.md-nav__container>a .md-ellipsis::after,
+.md-nav--primary .md-nav__item:not(.md-nav__item--nested)>a.md-nav__link .md-ellipsis::after,
+.md-header__topic .md-ellipsis::after {
+  margin-left: -1ch;
+}
+
+/* The page title doesn't need a permalink, and it would sit between the
+   text and the blinking cursor. The hero heading is plain text. */
+.md-typeset h1 .headerlink {
+  display: none;
+}
+
+.resume-hero h1::before,
+.resume-hero h1::after {
+  content: none;
+}
+
+.md-header__topic[data-md-component="header-topic"] .md-ellipsis::before {
+  margin-right: -1ch;
 }

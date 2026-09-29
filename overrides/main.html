@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 
 {#
-Material's default `fonts` block always requests every weight/style
-combination for both the text and code font (6 + 4 = 10 files), no matter
-which weights are actually used. This site only ever uses 400/700 of the
-text font and 400/400-italic/700 of the code font, so we request exactly
-those instead. theme.font is set to `false` in mkdocs.yml so the default
-block doesn't also fire, and the --md-text-font / --md-code-font variables
-it would normally set are defined directly in docs/stylesheets/extra.css.
+  Fonts. Material's default `fonts` block requests every weight/style of the
+  text and code font (10 files). theme.font is `false` in mkdocs.yml so that
+  block doesn't fire; this one asks for exactly what the site uses, as
+  variable fonts (one file covers the whole weight range):
+
+    - Space Grotesk     400-700          -> prose, headings, UI
+    - JetBrains Mono   400-700 + italic -> code
+
+  The --md-text-font / --md-code-font variables are set in extra.css.
+  display=swap shows text immediately in the fallback font, then swaps.
 #}
 {% block fonts %}
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400&display=swap">
 {% endblock %}
 
 {% block extrahead %}
-<meta name="theme-color" content="#0a0c0b">
+  <meta name="theme-color" content="#282a36">
+  {# The homepage hero image is its largest paint; fetch it early. #}
+  {% if page and page.is_homepage %}
+  <link rel="preload" as="image" href="{{ 'assets/luffy.jpg' | url }}">
+  {% endif %}
 {% endblock %}
