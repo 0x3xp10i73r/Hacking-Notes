@@ -1,7 +1,7 @@
 :root {
-  /* Space Grotesk for prose/headings, JetBrains Mono for code and the terminal chrome.
+  /* Atkinson Hyperlegible for prose/headings, JetBrains Mono for code and the terminal chrome.
      Both are variable fonts loaded in overrides/main.html. */
-  --md-text-font: "Space Grotesk";
+  --md-text-font: "Atkinson Hyperlegible";
   --md-code-font: "JetBrains Mono";
 
   /* Dracula (https://draculatheme.com). Surfaces: page background, the
@@ -70,6 +70,7 @@ body {
 }
 
 /* Focus is always visible: keyboard users get a clear outline everywhere. */
+
 :focus-visible {
   outline: 2px solid var(--kb-accent);
   outline-offset: 2px;
@@ -135,11 +136,13 @@ body {
    stays visible at every width (Material hides it by default at desktop
    since the sidebar there is normally always pinned open) — here it doubles
    as a collapse/expand control for the pinned sidebar. */
+
 @media screen and (min-width: 76.25em) {
   /* Material hides this button by default at desktop widths (min-width:
      76.25em in its own stylesheet) since the sidebar is normally always
      pinned open there. Overriding it back on is what makes it usable as a
      collapse/expand control below. */
+
   .md-header__button[for="__drawer"] {
     display: inline-block;
   }
@@ -156,13 +159,14 @@ body {
   }
 
   .md-sidebar--primary .md-sidebar__scrollwrap,
-  .md-sidebar--primary .md-sidebar__inner {
+.md-sidebar--primary .md-sidebar__inner {
     height: 100%;
     max-height: none;
     overflow-y: auto;
   }
 
   /* Let the sidebar meet the header instead of floating 1.5rem below it. */
+
   .md-main__inner {
     margin-top: 0;
   }
@@ -170,6 +174,7 @@ body {
   /* Material reserves `padding-right: calc(100% - 11.5rem)` here, sized for
      its default 12.1rem sidebar. With our wider sidebar that leaves the nav
      stuck at 11.5rem wide, so labels wrap and truncate. */
+
   .md-sidebar--primary .md-sidebar__inner {
     padding-right: 0;
   }
@@ -182,6 +187,7 @@ body {
      instead of staying centered. Fixing that: give content a fixed width
      (matching what it already was: 96rem grid − 18rem sidebar) and center
      it with real auto margins instead of letting it grow to fill the row. */
+
   #__drawer:checked~.md-container .md-sidebar--primary {
     display: none;
   }
@@ -309,6 +315,7 @@ body {
    itself a .md-nav__link, holding a link and a chevron label that are also
    .md-nav__link. Padding only belongs on the inner two, otherwise it stacks
    three deep and crushes the text. */
+
 .md-nav--primary .md-nav__link.md-nav__container {
   padding: 0;
 }
@@ -442,6 +449,7 @@ body {
    `.md-sidebar--secondary:not([hidden])` rule that re-shows it on any page
    with headings, so matching that specificity is what actually keeps it
    (and the empty column it reserves) gone. */
+
 .md-sidebar--secondary,
 .md-sidebar--secondary:not([hidden]) {
   display: none;
@@ -457,6 +465,7 @@ body {
 
 /* Prose gets a comfortable reading measure; tables, code blocks, admonitions
    and the custom card layouts stay full-width since they need the room. */
+
 .md-typeset>p,
 .md-typeset>ul,
 .md-typeset>ol,
@@ -470,6 +479,7 @@ body {
 
 /* Heading scale. Material's defaults are light (300) and loose; a sans
    reads better tighter and heavier on a dark background. */
+
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
@@ -481,23 +491,23 @@ body {
 .md-typeset h1 {
   font-size: 2.05em;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
   line-height: 1.15;
 }
 
 .md-typeset h2 {
   border-bottom: 1px solid var(--kb-border);
   font-size: 1.5em;
-  font-weight: 650;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1.25;
   padding-bottom: 0.45rem;
 }
 
 .md-typeset h3 {
   font-size: 1.15em;
-  font-weight: 650;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .md-typeset h4 {
@@ -511,81 +521,6 @@ body {
 
 .md-typeset a:hover {
   color: var(--kb-cyan);
-}
-
-.resume-hero {
-  background: var(--kb-panel);
-  border: 1px solid var(--kb-border);
-  border-left: 3px solid var(--kb-accent);
-  border-radius: 6px;
-  margin: 0 0 2.5rem;
-  padding: 1.5rem 1.75rem;
-}
-
-.profile-cover {
-  background-image:
-    linear-gradient(90deg, rgba(40, 42, 54, 0.15), rgba(40, 42, 54, 0.55)),
-    url("../assets/luffy.jpg");
-  background-position: right center;
-  background-size: cover;
-  border: 1px solid var(--kb-border);
-  border-radius: 4px;
-  height: 14rem;
-  margin: -0.25rem -0.25rem 1.25rem;
-  position: relative;
-}
-
-.profile-cover::after {
-  background: linear-gradient(180deg, transparent 70%, rgba(40, 42, 54, 0.75) 100%);
-  content: "";
-  inset: 0;
-  position: absolute;
-}
-
-.resume-hero h1 {
-  border: 0;
-  color: var(--kb-text);
-  font-size: clamp(1.8rem, 4vw, 3.2rem);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-  margin: 0.45rem 0 0.8rem;
-  padding: 0;
-}
-
-.resume-hero h1::before {
-  content: none;
-}
-
-.terminal-kicker {
-  color: var(--kb-green);
-  font-family: var(--md-code-font-family);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-}
-
-.resume-hero strong {
-  color: var(--kb-accent);
-  font-size: 1.05rem;
-}
-
-.resume-contact {
-  border-top: 1px solid var(--kb-border);
-  color: var(--kb-muted);
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-}
-
-.resume-contact code {
-  color: var(--kb-accent);
-}
-
-.resume-links,
-.resume-socials {
-  color: var(--kb-text);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-  margin-top: 1.25rem;
 }
 
 .profile-section {
@@ -657,134 +592,7 @@ body {
   font-weight: 700;
 }
 
-.resume-links a,
-.resume-socials a {
-  color: var(--kb-text);
-  font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--kb-accent);
-  text-underline-offset: 0.18em;
-}
-
-.resume-metrics,
-.security-cards {
-  display: grid;
-  gap: 0.8rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 1.25rem 0 2.5rem;
-}
-
-.metric,
-.security-card,
-.cert-strip {
-  background: var(--kb-panel);
-  border: 1px solid var(--kb-border);
-  border-radius: 4px;
-  padding: 1rem 1.1rem;
-}
-
-.metric {
-  color: var(--kb-muted);
-  font-size: 0.72rem;
-  line-height: 1.6;
-}
-
-.metric strong {
-  color: var(--kb-cyan);
-  font-family: var(--md-code-font-family);
-  font-size: 1.35rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.metric strong+strong {
-  color: var(--kb-text);
-  display: block;
-  font-size: 0.72rem;
-}
-
-.security-card {
-  min-height: 9rem;
-}
-
-.security-card h3 {
-  color: var(--kb-text);
-  font-size: 0.95rem;
-  margin-top: 0;
-}
-
-.security-card p {
-  color: var(--kb-muted);
-  font-size: 0.82rem;
-  line-height: 1.7;
-}
-
-.cert-strip {
-  border-left: 3px solid var(--kb-accent);
-  color: var(--kb-muted);
-  margin: 1rem 0;
-}
-
-.cert-strip code {
-  color: var(--kb-accent);
-}
-
-.resume-skills {
-  display: grid;
-  gap: 0;
-  grid-template-columns: 1fr;
-}
-
-.skills-item {
-  align-items: start;
-  border-bottom: 1px solid var(--kb-border);
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: minmax(11rem, 22%) 1fr;
-  padding: 1rem 0;
-}
-
-.skills-item:first-child {
-  border-top: 1px solid var(--kb-border);
-}
-
-.resume-skills h3 {
-  color: var(--kb-text);
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-.resume-skills p {
-  color: var(--kb-muted);
-  font-size: 0.86rem;
-  line-height: 1.75;
-  margin: 0;
-}
-
 @media screen and (max-width: 700px) {
-  .resume-hero {
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
-    padding: 1.25rem;
-  }
-
-  .profile-cover {
-    height: 10rem;
-    margin-left: -0.25rem;
-    margin-right: -0.25rem;
-  }
-
-  .resume-skills {
-    grid-template-columns: 1fr;
-  }
-
-  .skills-item {
-    gap: 0.35rem;
-    grid-template-columns: 1fr;
-  }
-
-  .resume-metrics,
-  .security-cards,
-  .education-list,
   .profile-grid {
     grid-template-columns: 1fr;
   }
@@ -804,6 +612,7 @@ body {
 }
 
 /* Slightly tighter, more "terminal" code blocks */
+
 .md-typeset pre>code {
   border: 1px solid var(--kb-border);
   border-left: 3px solid var(--kb-accent);
@@ -815,6 +624,7 @@ body {
 }
 
 /* Clean, responsive tables */
+
 .md-typeset table:not([class]) {
   display: table;
   width: 100%;
@@ -834,7 +644,7 @@ body {
 
 .md-typeset table:not([class]) th {
   color: var(--kb-text);
-  font-weight: 650;
+  font-weight: 700;
   font-size: 0.7rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -875,79 +685,16 @@ body {
 }
 
 /* Responsive table handling */
+
 @media screen and (max-width: 768px) {
   .md-typeset table:not([class]) {
     font-size: 0.75rem;
   }
 
   .md-typeset table:not([class]) th,
-  .md-typeset table:not([class]) td {
+.md-typeset table:not([class]) td {
     padding: 0.5rem 0.65rem;
   }
-}
-
-.education-list {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-  margin-bottom: 1rem;
-  padding-left: 1.25rem;
-  position: relative;
-}
-
-.education-list::before {
-  background: var(--kb-border);
-  bottom: 0.8rem;
-  content: "";
-  left: 0.25rem;
-  position: absolute;
-  top: 0.8rem;
-  width: 1px;
-}
-
-.education-item {
-  background: var(--kb-panel);
-  border: 1px solid var(--kb-border);
-  border-left: 3px solid var(--kb-accent);
-  border-radius: 4px;
-  padding: 1rem 1.1rem;
-  position: relative;
-}
-
-.education-item::before {
-  background: var(--kb-accent);
-  border: 3px solid var(--kb-ink);
-  border-radius: 50%;
-  content: "";
-  height: 0.65rem;
-  left: -1.62rem;
-  position: absolute;
-  top: 1.25rem;
-  width: 0.65rem;
-}
-
-.education-item h3 {
-  font-size: 0.95rem;
-  margin-top: 0;
-}
-
-.education-item p {
-  color: var(--kb-muted);
-  font-size: 0.82rem;
-}
-
-/* Card grid used on the homepage */
-.grid.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 0.8rem;
-  margin: 1.5rem 0;
-}
-
-.grid.cards>* {
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 8px;
-  padding: 1rem 1.2rem;
 }
 
 /* ---------------------------------------------------------------------
@@ -982,12 +729,14 @@ body {
 }
 
 /* Dracula markdown convention: bold is orange. */
+
 .md-typeset strong {
   color: var(--kb-orange);
-  font-weight: 650;
+  font-weight: 700;
 }
 
 /* Content links: quiet underline that firms up on hover. */
+
 .md-typeset p a,
 .md-typeset li a,
 .md-typeset td a {
@@ -1006,6 +755,7 @@ body {
 
 /* Everything code-like is JetBrains Mono. Ligatures are off on purpose:
    in security notes `!=`, `->` and `==` must be read as typed. */
+
 .md-typeset code,
 .md-typeset pre,
 .md-typeset kbd,
@@ -1051,7 +801,7 @@ body {
 
 .md-typeset .admonition-title,
 .md-typeset summary {
-  font-weight: 650;
+  font-weight: 700;
 }
 
 .md-footer,
@@ -1061,10 +811,11 @@ body {
 }
 
 /* Respect the OS "reduce motion" setting: drop transitions and animation. */
+
 @media (prefers-reduced-motion: reduce) {
   *,
-  *::before,
-  *::after {
+*::before,
+*::after {
     animation: none !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
@@ -1082,6 +833,7 @@ body {
 }
 
 /* Header: the site name is a shell prompt with a blinking cursor. */
+
 .md-header__topic {
   font-family: var(--md-code-font-family);
   font-size: 0.95rem;
@@ -1101,6 +853,7 @@ body {
 }
 
 /* Page title that replaces the site name on scroll reads like a file. */
+
 .md-header__topic[data-md-component="header-topic"] .md-ellipsis::before {
   color: var(--kb-comment);
   content: "./";
@@ -1112,6 +865,7 @@ body {
 }
 
 /* Sidebar as a file tree: directories are cyan ./name/, files are name.sh */
+
 .md-nav--primary .md-nav__item--section>.md-nav__container>a .md-ellipsis::before {
   color: var(--kb-comment);
   content: "./";
@@ -1140,8 +894,9 @@ body {
 }
 
 /* Headings read like a shell/markdown session. */
+
 .md-typeset h1 {
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
 .md-typeset h1::before {
@@ -1167,17 +922,11 @@ body {
 }
 
 .md-typeset h2::before { content: "# "; }
+
 .md-typeset h3::before { content: "## "; }
 
-/* Card/timeline headings and the hero heading keep their plain text. */
-.resume-hero h1::after,
-.security-card h3::before,
-.education-item h3::before,
-.resume-skills h3::before {
-  content: none;
-}
-
 /* Code blocks are terminal windows: title bar, traffic lights, language. */
+
 .md-typeset .highlight {
   background: var(--kb-panel);
   border: 1px solid var(--kb-border);
@@ -1201,17 +950,27 @@ body {
 .md-typeset .language-sh::before,
 .md-typeset .language-shell::before,
 .md-typeset .language-console::before { content: "bash"; }
+
 .md-typeset .language-javascript::before,
 .md-typeset .language-js::before { content: "javascript"; }
+
 .md-typeset .language-python::before,
 .md-typeset .language-py::before { content: "python"; }
+
 .md-typeset .language-java::before { content: "java"; }
+
 .md-typeset .language-kotlin::before { content: "kotlin"; }
+
 .md-typeset .language-xml::before { content: "xml"; }
+
 .md-typeset .language-json::before { content: "json"; }
+
 .md-typeset .language-yaml::before { content: "yaml"; }
+
 .md-typeset .language-sql::before { content: "sql"; }
+
 .md-typeset .language-http::before { content: "http"; }
+
 .md-typeset .language-text::before,
 .md-typeset .language-txt::before { content: "output"; }
 
@@ -1225,6 +984,7 @@ body {
 }
 
 /* Admonitions read as log tags. */
+
 .md-typeset .admonition-title,
 .md-typeset summary {
   font-family: var(--md-code-font-family);
@@ -1234,40 +994,10 @@ body {
 }
 
 /* Tables: header row in mono like a command's column output. */
+
 .md-typeset table:not([class]) th {
   font-family: var(--md-code-font-family);
   font-size: 0.66rem;
-}
-
-/* Hero card is a terminal window running ./whoami.sh */
-.resume-hero {
-  overflow: hidden;
-}
-
-.resume-hero::before {
-  background: var(--kb-window-dots), var(--kb-panel-raised);
-  border-bottom: 1px solid var(--kb-border);
-  color: var(--kb-muted);
-  content: "bash \2014  0x3xp10i73r@kb: ~";
-  display: block;
-  font-family: var(--md-code-font-family);
-  font-size: 0.66rem;
-  letter-spacing: 0.04em;
-  margin: -1.5rem -1.75rem 1.25rem;
-  padding: 0.55rem 1rem 0.55rem 3.5rem;
-}
-
-@media screen and (max-width: 700px) {
-  .resume-hero::before {
-    margin: -1.25rem -1.25rem 1rem;
-  }
-}
-
-.resume-links a {
-  font-family: var(--md-code-font-family);
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-decoration-color: var(--kb-green);
 }
 
 .md-footer-meta .md-copyright {
@@ -1282,7 +1012,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .md-header__topic:first-child .md-ellipsis::after,
-  .md-typeset h1::after {
+.md-typeset h1::after {
     animation: none;
   }
 }
@@ -1290,6 +1020,7 @@ body {
 /* Material's markup leaves whitespace around the title text inside
    .md-ellipsis, which shows up as a gap before/after generated content.
    Pull the pseudo-elements back by one mono character to close it. */
+
 .md-nav--primary .md-nav__item--section>.md-nav__container>a .md-ellipsis::before {
   margin-right: -1ch;
 }
@@ -1302,15 +1033,548 @@ body {
 
 /* The page title doesn't need a permalink, and it would sit between the
    text and the blinking cursor. The hero heading is plain text. */
+
 .md-typeset h1 .headerlink {
   display: none;
 }
 
-.resume-hero h1::before,
-.resume-hero h1::after {
+.md-header__topic[data-md-component="header-topic"] .md-ellipsis::before {
+  margin-right: -1ch;
+}
+
+/* ---------------------------------------------------------------------
+   Home page: a notebook landing page, not a resume.
+   Hero (intro + "man page" terminal) -> Start here -> Browse by area
+   -> Ground rules -> Public profiles.
+   --------------------------------------------------------------------- */
+
+.home-hero {
+  align-items: center;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  margin: 0.5rem 0 3.25rem;
+}
+
+.home-kicker {
+  color: var(--kb-green);
+  font-family: var(--md-code-font-family);
+  font-size: 0.74rem;
+  margin: 0 0 0.5rem;
+}
+
+.md-typeset .home-hero h1 {
+  font-size: clamp(2.3rem, 4.6vw, 3.7rem);
+  line-height: 1.05;
+  margin: 0 0 0.9rem;
+}
+
+.md-typeset .home-lead {
+  color: var(--kb-text);
+  font-size: 1.12em;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 34rem;
+}
+
+.home-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+.md-typeset .home-btn {
+  background: var(--kb-panel);
+  border: 1px solid var(--kb-border);
+  border-radius: 8px;
+  color: var(--kb-text);
+  font-family: var(--md-code-font-family);
+  font-size: 0.76rem;
+  padding: 0.65rem 1.05rem;
+  text-decoration: none;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.md-typeset .home-btn:hover {
+  border-color: var(--kb-purple);
+  color: var(--kb-purple);
+}
+
+.md-typeset .home-btn--primary {
+  background: var(--kb-purple);
+  border-color: var(--kb-purple);
+  color: var(--kb-ink);
+  font-weight: 700;
+}
+
+.md-typeset .home-btn--primary:hover {
+  background: var(--kb-pink);
+  border-color: var(--kb-pink);
+  color: var(--kb-ink);
+}
+
+.md-typeset .home-byline {
+  color: var(--kb-muted);
+  font-family: var(--md-code-font-family);
+  font-size: 0.7rem;
+  margin: 1.5rem 0 0;
+}
+
+/* The "man notes" terminal: it is the how-to-use section. */
+.home-term {
+  background: var(--kb-panel);
+  border: 1px solid var(--kb-border);
+  border-radius: 10px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.home-term__bar {
+  background: var(--kb-window-dots), var(--kb-panel-raised);
+  border-bottom: 1px solid var(--kb-border);
+  color: var(--kb-muted);
+  font-family: var(--md-code-font-family);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  padding: 0.55rem 1rem 0.55rem 3.5rem;
+}
+
+.home-term__body {
+  font-family: var(--md-code-font-family);
+  font-size: 0.76rem;
+  line-height: 1.7;
+  padding: 1rem 1.25rem 1.15rem;
+}
+
+.md-typeset .home-term p {
+  margin: 0;
+}
+
+.home-term .t-prompt {
+  color: var(--kb-green);
+}
+
+.home-term .t-head {
+  color: var(--kb-pink);
+  letter-spacing: 0.08em;
+  margin-top: 0.85rem !important;
+}
+
+.home-term .t-row {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+}
+
+.md-typeset .home-term code,
+.md-typeset .home-term kbd {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  color: var(--kb-cyan);
+  font-size: inherit;
+  padding: 0;
+}
+
+.home-term .t-row span {
+  color: var(--kb-muted);
+}
+
+.home-term .t-cursor {
+  animation: kb-blink 1.1s step-end infinite;
+  color: var(--kb-green);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-term .t-cursor {
+    animation: none;
+  }
+}
+
+.home-section {
+  margin: 0 0 3rem;
+}
+
+.md-typeset .home-note {
+  color: var(--kb-muted);
+  margin: -0.25rem 0 1.1rem;
+}
+
+/* "Start here": path on the left, one-line comment on the right. */
+.md-typeset .home-jump {
+  background: var(--kb-panel);
+  border: 1px solid var(--kb-border);
+  border-radius: 10px;
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.md-typeset .home-jump li {
+  border-top: 1px solid var(--kb-border);
+  margin: 0;
+  padding: 0;
+}
+
+.md-typeset .home-jump li:first-child {
+  border-top: 0;
+}
+
+.md-typeset .home-jump a {
+  align-items: baseline;
+  border-left: 3px solid transparent;
+  color: var(--kb-text);
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
+  padding: 0.8rem 1.1rem;
+  text-decoration: none;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.md-typeset .home-jump a:hover {
+  background: var(--kb-panel-raised);
+  border-left-color: var(--kb-purple);
+  color: var(--kb-text);
+}
+
+.home-jump .path {
+  color: var(--kb-cyan);
+  font-family: var(--md-code-font-family);
+  font-size: 0.78rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.home-jump .path::before {
+  color: var(--kb-comment);
+  content: "./";
+  font-weight: 400;
+}
+
+.home-jump a:hover .path {
+  color: var(--kb-pink);
+}
+
+.home-jump .desc {
+  color: var(--kb-muted);
+  font-size: 0.9em;
+  line-height: 1.55;
+}
+
+/* "Browse by area": one card per section, with an honest status. */
+.home-areas {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+}
+
+.md-typeset .home-area {
+  background: var(--kb-panel);
+  border: 1px solid var(--kb-border);
+  border-radius: 10px;
+  color: var(--kb-text);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.05rem 1.15rem 1.15rem;
+  text-decoration: none;
+  transition: border-color 150ms ease, transform 150ms ease, background 150ms ease;
+}
+
+.md-typeset .home-area:hover {
+  background: var(--kb-panel-raised);
+  border-color: var(--kb-purple);
+  color: var(--kb-text);
+  transform: translateY(-2px);
+}
+
+.home-area__top {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.home-area__dir {
+  color: var(--kb-cyan);
+  font-family: var(--md-code-font-family);
+  font-size: 0.84rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.home-area__badge {
+  border: 1px solid var(--kb-border);
+  border-radius: 999px;
+  color: var(--kb-muted);
+  flex: none;
+  font-family: var(--md-code-font-family);
+  font-size: 0.62rem;
+  padding: 0.1rem 0.55rem;
+}
+
+.home-area__badge--live {
+  background: rgba(80, 250, 123, 0.1);
+  border-color: rgba(80, 250, 123, 0.4);
+  color: var(--kb-green);
+}
+
+.home-area__badge--growing {
+  background: rgba(255, 184, 108, 0.1);
+  border-color: rgba(255, 184, 108, 0.4);
+  color: var(--kb-orange);
+}
+
+.home-area__desc {
+  color: var(--kb-muted);
+  font-size: 0.9em;
+  line-height: 1.55;
+}
+
+@media screen and (max-width: 60em) {
+  .home-hero {
+    gap: 1.75rem;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .md-typeset .home-jump a {
+    gap: 0.15rem;
+    grid-template-columns: 1fr;
+  }
+
+  .home-term .t-row {
+    gap: 0.6rem;
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   About page
+   --------------------------------------------------------------------- */
+
+.md-typeset .home-byline a {
+  color: var(--kb-text);
+  text-decoration-color: var(--kb-purple);
+}
+
+.md-typeset .home-byline a:hover {
+  color: var(--kb-purple);
+}
+
+.about-hero {
+  margin: 0.5rem 0 2.75rem;
+}
+
+.md-typeset .about-hero h1 {
+  margin: 0 0 0.9rem;
+}
+
+.md-typeset .about-hero h1::before {
+  content: "$ ";
+}
+
+.about-facts {
+  border-top: 1px solid var(--kb-border);
+  display: grid;
+  gap: 0.1rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+}
+
+.about-facts div {
+  color: var(--kb-text);
+  font-size: 0.9em;
+  padding: 0.4rem 0;
+}
+
+.about-facts span {
+  color: var(--kb-comment);
+  display: block;
+  font-family: var(--md-code-font-family);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.15rem;
+  text-transform: uppercase;
+}
+
+/* Experience / projects / education: a left-rule timeline of log entries. */
+.about-timeline {
+  border-left: 2px solid var(--kb-border);
+  display: grid;
+  gap: 1.75rem;
+  margin: 1.25rem 0 2rem;
+  padding-left: 1.5rem;
+}
+
+.about-entry {
+  position: relative;
+}
+
+.about-entry::before {
+  background: var(--kb-ink);
+  border: 2px solid var(--kb-purple);
+  border-radius: 50%;
+  content: "";
+  height: 0.6rem;
+  left: -1.84rem;
+  position: absolute;
+  top: 0.4rem;
+  width: 0.6rem;
+}
+
+.about-entry__head {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.md-typeset .about-entry h3 {
+  margin: 0;
+}
+
+.md-typeset .about-entry h3::before {
   content: none;
 }
 
-.md-header__topic[data-md-component="header-topic"] .md-ellipsis::before {
-  margin-right: -1ch;
+.about-badge {
+  border: 1px solid var(--kb-border);
+  border-radius: 999px;
+  font-family: var(--md-code-font-family);
+  font-size: 0.62rem;
+  padding: 0.05rem 0.55rem;
+}
+
+.about-badge--live {
+  background: rgba(80, 250, 123, 0.1);
+  border-color: rgba(80, 250, 123, 0.4);
+  color: var(--kb-green);
+}
+
+.md-typeset .about-meta {
+  color: var(--kb-comment);
+  font-family: var(--md-code-font-family);
+  font-size: 0.78rem;
+  margin: 0.25rem 0 0.7rem;
+}
+
+.about-entry ul {
+  margin: 0 !important;
+}
+
+.md-typeset .about-cert {
+  background: var(--kb-panel);
+  border: 1px solid var(--kb-border);
+  border-left: 3px solid var(--kb-orange);
+  border-radius: 6px;
+  color: var(--kb-muted);
+  margin: 1.25rem 0;
+  padding: 0.85rem 1.1rem;
+}
+
+.about-cert code {
+  color: var(--kb-orange);
+}
+
+.md-typeset .about-pub {
+  background: var(--kb-panel);
+  border: 1px solid var(--kb-border);
+  border-radius: 6px;
+  color: var(--kb-muted);
+  font-size: 0.92em;
+  line-height: 1.65;
+  margin: 1.25rem 0;
+  padding: 1rem 1.15rem;
+}
+
+.about-pub a {
+  color: var(--kb-cyan);
+  font-family: var(--md-code-font-family);
+  font-size: 0.85rem;
+}
+
+.about-skills {
+  display: grid;
+  gap: 1.4rem;
+  margin: 1.25rem 0 2rem;
+}
+
+.md-typeset .about-skill-label {
+  color: var(--kb-comment);
+  font-family: var(--md-code-font-family);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.55rem;
+  text-transform: uppercase;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.about-tag {
+  background: var(--kb-panel);
+  border: 1px solid var(--kb-border);
+  border-radius: 6px;
+  color: var(--kb-text);
+  font-family: var(--md-code-font-family);
+  font-size: 0.74rem;
+  padding: 0.3rem 0.65rem;
+}
+
+.md-typeset .about-back {
+  border-top: 1px solid var(--kb-border);
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+}
+
+.about-back a {
+  color: var(--kb-muted);
+  font-family: var(--md-code-font-family);
+  font-size: 0.82rem;
+}
+
+.about-back a:hover {
+  color: var(--kb-purple);
+}
+
+@media screen and (max-width: 700px) {
+  .about-timeline {
+    padding-left: 1.1rem;
+  }
+
+  .about-entry::before {
+    left: -1.44rem;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Page header image (home + about). Files live in docs/assets:
+   home-header.png and about-header.png.
+   --------------------------------------------------------------------- */
+
+.md-typeset .page-header {
+  margin: 0.25rem 0 1.75rem;
+}
+
+/* Notion-style cover: full width, fixed short height, cropped to fit.
+   Tweak the second value of object-position (0% = top, 100% = bottom)
+   to choose which slice of the image is shown. */
+.md-typeset .page-header img {
+  border: 1px solid var(--kb-border);
+  border-radius: 0.5rem;
+  display: block;
+  height: clamp(160px, 20vw, 260px);
+  margin: 0 auto;
+  object-fit: cover;
+  object-position: center 62%;
+  width: 100%;
 }
