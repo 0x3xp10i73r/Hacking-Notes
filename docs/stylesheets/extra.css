@@ -1578,3 +1578,47 @@ body {
   object-position: center 62%;
   width: 100%;
 }
+
+/* ---------------------------------------------------------------------
+   Mobile / tablet sidebar (below Material's 76.25em desktop breakpoint).
+   Material's off-canvas drawer is a fixed 12.1rem, which is too narrow for
+   the ./section/ labels (they wrap). Widen it to fit the screen.
+   --------------------------------------------------------------------- */
+
+@media screen and (max-width: 76.1875em) {
+  [dir="ltr"] .md-sidebar--primary {
+    --kb-drawer-w: min(19rem, 88vw);
+    left: calc(-1 * var(--kb-drawer-w));
+    width: var(--kb-drawer-w);
+  }
+
+  [data-md-toggle="drawer"]:checked~.md-container .md-sidebar--primary {
+    transform: translateX(var(--kb-drawer-w));
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .md-nav--primary {
+    padding-top: 0.75rem;
+  }
+
+  /* On mobile Material turns every nested nav into an absolutely positioned
+     slide-over panel (with a back-arrow title, which this theme hides), so
+     expanding a section paints its children on top of the other items.
+     Render them inline like the desktop sidebar does instead. */
+
+  .md-nav--primary .md-nav__item--nested>.md-nav {
+    background: transparent;
+    height: auto;
+    position: static;
+    transform: none;
+    width: auto;
+  }
+
+  .md-nav--primary .md-nav__item--nested:not(.md-nav__item--section)>.md-nav__toggle:not(:checked)~.md-nav {
+    display: none;
+  }
+}
