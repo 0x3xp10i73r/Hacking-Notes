@@ -3,7 +3,7 @@ description: About Meghan Tashi (0x3xp10i73r) - security researcher focused on w
 ---
 
 <div class="page-header">
-<img src="assets/header.jpg" alt="About header">
+<img src="../assets/header.jpg" alt="About header">
 </div>
 
 <div class="about-hero" markdown="1">
