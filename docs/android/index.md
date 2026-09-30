@@ -120,6 +120,7 @@ adb shell monkey -p com.example.app -c android.intent.category.LAUNCHER 1
 adb uninstall com.example.app
 ```
 
+
 ```bash
 # Decode resources and Smali
 apktool d app.apk -o app-decoded

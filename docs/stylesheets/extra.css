@@ -931,7 +931,22 @@ body {
   background: var(--kb-panel);
   border: 1px solid var(--kb-border);
   border-radius: 8px;
+  margin: 1.25em 0;
   overflow: hidden;
+}
+
+/* No extra gap when a window is the first/last thing inside a box. */
+
+.md-typeset .admonition .highlight:first-child,
+.md-typeset details .highlight:first-child,
+.md-typeset .tabbed-block>.highlight:first-child {
+  margin-top: 0;
+}
+
+.md-typeset .admonition .highlight:last-child,
+.md-typeset details .highlight:last-child,
+.md-typeset .tabbed-block>.highlight:last-child {
+  margin-bottom: 0;
 }
 
 .md-typeset .highlight::before {
